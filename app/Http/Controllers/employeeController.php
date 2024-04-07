@@ -51,19 +51,7 @@ class EmployeeController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    
     protected function respondWithToken($token)
     {
         return response()->json([
@@ -82,6 +70,25 @@ class EmployeeController extends Controller
        ]);
        employee ::create($input);
        return response()->json(["message"=>"employee is added successfully"]);
+    }
+
+
+
+    //poe
+    public function getEmployees()
+    {
+        $employees = Employee::all();
+        return response()->json($employees);
+    }
+
+    public function getEmployee($id)
+    {
+        $employee = Employee::find($id);
+        if ($employee) {
+            return response()->json($employee);
+        } else {
+            return response()->json(['message' => 'Employee not found'], 404);
+        }
     }
 
 }
